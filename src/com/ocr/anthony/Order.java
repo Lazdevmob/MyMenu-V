@@ -3,6 +3,8 @@ package com.ocr.anthony;
 import java.util.Scanner;
 
 public class Order {
+    Scanner sc = new Scanner(System.in);
+
     /**
      * Display all available menus in the restaurant.
      */
@@ -13,8 +15,10 @@ public class Order {
         System.out.println("3 - végétarien");
         System.out.println("Que souhaitez-vous comme menu ?");
     }
+
     /**
      * Display a selected menu.
+     *
      * @param nbMenu The selected menu.
      */
     public void displaySelectedMenu(int nbMenu) {
@@ -33,13 +37,16 @@ public class Order {
                 break;
         }
     }
+
     /**
      * Run asking process for a menu.
      */
     public void runMenu() {
         this.displayAvailableMenu();
-        Scanner sc = new Scanner(System.in);
-        int nbMenu = sc.nextInt();
+        int nbMenu;
+        do {
+        nbMenu = sc.nextInt();
+
         this.displaySelectedMenu(nbMenu);
         switch (nbMenu) {
             case 1:
@@ -64,13 +71,16 @@ public class Order {
                 displaySelectedDrink(nbDrink);
                 break;
         }
+    } while (nbMenu < 1 || nbMenu > 3);
     }
+
     /**
      * Display a selected side depending on all sides enable or not.
      * All sides = vegetables, frites and rice
      * No all sides = rice or not
-     * @param nbSide The selected Side
-     * @param allSidesEnable  enable display for all side or not
+     *
+     * @param nbSide         The selected Side
+     * @param allSidesEnable enable display for all side or not
      */
     public void displaySelectedSide(int nbSide, boolean allSidesEnable) {
         if (allSidesEnable) {
@@ -102,8 +112,10 @@ public class Order {
             }
         }
     }
+
     /**
      * Display a selected drink.
+     *
      * @param nbDrink The selected drink.
      */
     public void displaySelectedDrink(int nbDrink) {
@@ -122,10 +134,12 @@ public class Order {
                 break;
         }
     }
+
     /**
      * Display all available sides depending on all sides enable or not.
      * All sides = vegetables, frites and rice
      * No all sides = rice or not
+     *
      * @param allSideEnable enable display for all side or not
      */
     public void displayAvailableSide(boolean allSideEnable) {
@@ -151,4 +165,15 @@ public class Order {
         System.out.println("3 - soda");
         System.out.println("Que souhaitez-vous comme boisson ?");
     }
+
+    public void runMenus() {
+        System.out.println("Combien souhaitez vous commander de menu ?");
+        int menuQuantity = sc.nextInt();
+        for (int i = 0; i < menuQuantity; i++) {
+            this.runMenu();
+        }
+    }
 }
+
+
+
